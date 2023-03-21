@@ -1,7 +1,13 @@
+import ExpenseItem from "./components/ExpenseItem";
 function App() {
-  return (
-      <div>This div is shown in "id='root'" element on index.html file.</div>
-  );
+    return (
+        <div>
+            <h1>Expenses</h1>
+            <p>This is going to be parent root!</p>
+            <br/>
+            <ExpenseItem/>
+        </div>
+    );
 }
 
 export default App;
