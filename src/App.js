@@ -1,4 +1,6 @@
 import ExpenseItem from "./components/ExpenseItem";
+import TextEditor from "./components/TextEditor";
+
 function App() {
     return (
         <div>
@@ -6,6 +8,9 @@ function App() {
             <p>This is going to be parent root!</p>
             <br/>
             <ExpenseItem/>
+
+            <hr/>
+            <TextEditor/>
         </div>
     );
 }
