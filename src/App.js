@@ -1,16 +1,12 @@
-import ExpenseItem from "./components/ExpenseItem";
 import TextEditor from "./components/TextEditor";
+import TextArea from "./components/TextArea";
 
 function App() {
     return (
         <div>
-            <h1>Expenses</h1>
-            <p>This is going to be parent root!</p>
-            <br/>
-            <ExpenseItem/>
-
-            <hr/>
             <TextEditor/>
+            <hr/>
+            <TextArea/>
         </div>
     );
 }
