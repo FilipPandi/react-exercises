@@ -4,9 +4,11 @@ import {Button} from "primereact/button";
 import {TextType} from './TextModel.js';
 import {Toast} from "primereact/toast";
 import {GetByTextType, Save} from './Service';
+import {Panel} from "primereact/panel";
 
 function TextArea() {
     const [textArea, setTextArea] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const toastRef = useRef();
     const handleChange = (event) => {
@@ -15,8 +17,19 @@ function TextArea() {
 
     const handleSaveClick = () => {
         if (textArea) {
-            Save(textArea, TextType.TEXT2);
-            toastRef.current.show({severity: 'info', summery: 'success', detail: 'Saved text: ' + textArea});
+            const saveResponse = Save(textArea, TextType.TEXT2).then(response => {
+                setLoading(true);
+
+                toastRef.current.show({severity: 'info', summery: 'success', detail: 'Saved text: ' + textArea});
+
+                setTimeout(() => {
+                    setLoading(false);
+                }, 1000);
+            });
+
+            saveResponse.catch(function (error) {
+                toastRef.current.show({severity: 'error', summery: 'error', detail: error.response.data});
+            });
         } else {
             toastRef.current.show({severity: 'error', summery: 'error', detail: 'Value empty!'});
         }
@@ -34,19 +47,23 @@ function TextArea() {
     return (
         <div style={{padding: '2%'}}>
             <Toast ref={toastRef}/>
-            <h2>Opcija 2:</h2>
-            <EditTextarea
-                name={textArea}
-                placeholder={'Text goes here!'}
-                id={'textArea'}
-                rows={7}
-                value={textArea}
-                onChange={handleChange}
-                style={{fontSize: '16px', width: '100%'}}
-            />
 
-            <Button type="submit" style={{marginTop: '5px'}} label="Save" onClick={handleSaveClick}
-                    value={"Submit"}/>
+            <Panel header="Option 2" className="custom-panel">
+            <div style={{margin: '20px'}}>
+                <EditTextarea
+                    name={textArea}
+                    placeholder={'Text goes here!'}
+                    id={'textArea'}
+                    rows={7}
+                    value={textArea}
+                    onChange={handleChange}
+                    style={{fontSize: '16px', width: '100%'}}
+                />
+            </div>
+
+                <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check" label="Save"
+                        loading={loading} onClick={handleSaveClick} size={"small"}/>
+            </Panel>
         </div>
     );
 }
