@@ -4,7 +4,7 @@ import 'primereact/resources/themes/arya-green/theme.css'
 
 import {Editor} from 'primereact/editor';
 import {Button} from "primereact/button";
-import {GetByTextType, Save} from "./Service";
+import {GetByTextType, SaveTextModel} from "./Service";
 import {TextType} from "./TextModel";
 import {EditText} from "react-edit-text";
 import {Panel} from "primereact/panel";
@@ -32,7 +32,7 @@ function TextEditor() {
     }, []);
     const handleSaveClick = () => {
         if (text) {
-            const saveResponse = Save(text, TextType.TEXT1).then(response => {
+            const saveResponse = SaveTextModel(text, TextType.TEXT1).then(response => {
                 setHiddenEditor(true);
                 setHiddenText(false);
                 setLoading(true);

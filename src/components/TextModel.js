@@ -4,8 +4,6 @@ export class TextType {
     static TEXT3 = 2;
 
 }
-
-// TextModel class with class fields
 export class TextModel {
     id;
     text;
