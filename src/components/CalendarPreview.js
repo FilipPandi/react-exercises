@@ -80,17 +80,18 @@ function CalendarPreview() {
                         </td>
                         <td style={{float: "right", marginLeft: "340px"}}>
                             <p>{String(date)}</p>
-                            <EditTextarea hidden={hiddenField} id="textElement" onChange={handleChange} value={text} name={text}
-                                          placeholder={"Enter text for date"} style={{fontSize: '16px', width: '100%'}}/>
+                            <EditTextarea hidden={hiddenField} id="textElement" onChange={handleChange} value={text}
+                                          name={text}
+                                          placeholder={"Enter text for date"}
+                                          style={{fontSize: '16px', width: '100%'}}/>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check"
+                        label="Save" loading={loading} onClick={handleSaveClick} size={"small"}/>
             </Panel>
-
-
-            <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check"
-                    label="Save" loading={loading} onClick={handleSaveClick} size={"small"}/>
         </div>
     );
 }
