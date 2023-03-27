@@ -8,11 +8,8 @@ function App() {
     return (
         <div>
             <Header/>
-            <hr/>
             <TextEditor/>
-            <hr/>
             <TextArea/>
-            <hr/>
             <CalendarPreview/>
         </div>
     );

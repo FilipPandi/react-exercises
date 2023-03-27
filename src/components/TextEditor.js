@@ -13,9 +13,11 @@ import 'primeicons/primeicons.css';
 
 function TextEditor() {
     const [text, setText] = useState('');
-    const [hiddenEditor, setHiddenEditor] = useState(true);
-    const [hiddenText, setHiddenText] = useState(false);
-    const [isVisibleCancel, setvisibleCancel] = useState(false);
+    const placeholderConstant = 'Enter text here!';
+    const [placeholder, setPlaceholder] = useState(placeholderConstant);
+    const [isVisibleEditor, setVisibleEditor] = useState(false);
+    const [isVisibleEditText, setVisibleEditText] = useState(true);
+    const [isVisibleCancel, setVisibleCancel] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const toastRef = useRef();
@@ -25,7 +27,8 @@ function TextEditor() {
 
     useEffect(() => {
         console.log('Component TextEditor loaded!');
-        setvisibleCancel(false);
+        setPlaceholder(placeholderConstant);
+        setVisibleCancel(false);
         GetByTextType(TextType.TEXT1)
             .then(value => {
                 console.log(value);
@@ -35,9 +38,9 @@ function TextEditor() {
     const handleSaveClick = () => {
         if (text) {
             const saveResponse = SaveTextModel(text, TextType.TEXT1).then(response => {
-                setHiddenEditor(true);
-                setHiddenText(false);
-                setvisibleCancel(false);
+                setVisibleEditor(false);
+                setVisibleEditText(true);
+                setVisibleCancel(false);
                 setLoading(true);
 
                 toastRef.current.show({severity: 'info', summery: 'success', detail: 'Saved text: ' + text});
@@ -47,7 +50,7 @@ function TextEditor() {
                 }, 1000);
             });
             saveResponse.catch(function (error) {
-                setvisibleCancel(true);
+                setVisibleCancel(true);
                 toastRef.current.show({severity: 'error', summery: 'error', detail: error.response.data});
             });
         } else {
@@ -56,15 +59,17 @@ function TextEditor() {
     }
 
     const editorClick = () => {
-        setvisibleCancel(true);
-        setHiddenEditor(false);
-        setHiddenText(true);
+        setPlaceholder(placeholderConstant);
+        setVisibleCancel(true);
+        setVisibleEditor(true);
+        setVisibleEditText(true);
     }
 
     const hideCancel = () => {
-        setHiddenEditor(true);
-        setHiddenText(false);
-        setvisibleCancel(false);
+        setPlaceholder(placeholderConstant);
+        setVisibleEditor(false);
+        setVisibleEditText(true);
+        setVisibleCancel(false);
     }
 
 
@@ -74,10 +79,12 @@ function TextEditor() {
 
             <Panel header="Option 1" className="custom-panel">
                 <div style={{margin: '20px'}} onClick={editorClick}>
-                    <EditText hidden={hiddenText} id="textElement" placeholder={"Enter text!"} name="{text}"
+                    <EditText className={isVisibleEditText ? "visible-element" : "invisible-element"} id="textElement"
+                              placeholder={placeholder} name={text}
                               value={text} inline readonly/>
                 </div>
-                <Editor hidden={hiddenEditor} id={'editorElement'} value={text} name={text} onTextChange={handleChange}
+                <Editor className={isVisibleEditor ? "visible-element" : "invisible-element"} id={'editorElement'}
+                        value={text} name={text} onTextChange={handleChange}
                         style={{height: '320px'}}/>
 
                 <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check"
