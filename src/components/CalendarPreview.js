@@ -56,7 +56,7 @@ function CalendarPreview() {
             });
         }
 
-    });
+    }, []);
 
     const getText = (e) => {
         setDate(e.value);
@@ -81,7 +81,7 @@ function CalendarPreview() {
                         <td style={{float: "right", marginLeft: "340px"}}>
                             <p>{String(date)}</p>
                             <EditTextarea hidden={hiddenField} id="textElement" onChange={handleChange} value={text} name={text}
-                                      placeholder={"Enter text for date"} style={{fontSize: '16px', width: '100%'}}/>
+                                          placeholder={"Enter text for date"} style={{fontSize: '16px', width: '100%'}}/>
                         </td>
                     </tr>
                     </tbody>
