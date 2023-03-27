@@ -2,3 +2,11 @@
     background-color: #54b5a6 !important;
     color: #ffffff !important;
 }
+
+.invisible-element {
+    display: none !important;
+}
+
+.visible-element {
+    display: unset !important;
+}

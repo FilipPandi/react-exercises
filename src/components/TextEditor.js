@@ -15,6 +15,7 @@ function TextEditor() {
     const [text, setText] = useState('');
     const [hiddenEditor, setHiddenEditor] = useState(true);
     const [hiddenText, setHiddenText] = useState(false);
+    const [isVisibleCancel, setvisibleCancel] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const toastRef = useRef();
@@ -24,6 +25,7 @@ function TextEditor() {
 
     useEffect(() => {
         console.log('Component TextEditor loaded!');
+        setvisibleCancel(false);
         GetByTextType(TextType.TEXT1)
             .then(value => {
                 console.log(value);
@@ -35,6 +37,7 @@ function TextEditor() {
             const saveResponse = SaveTextModel(text, TextType.TEXT1).then(response => {
                 setHiddenEditor(true);
                 setHiddenText(false);
+                setvisibleCancel(false);
                 setLoading(true);
 
                 toastRef.current.show({severity: 'info', summery: 'success', detail: 'Saved text: ' + text});
@@ -44,6 +47,7 @@ function TextEditor() {
                 }, 1000);
             });
             saveResponse.catch(function (error) {
+                setvisibleCancel(true);
                 toastRef.current.show({severity: 'error', summery: 'error', detail: error.response.data});
             });
         } else {
@@ -52,8 +56,15 @@ function TextEditor() {
     }
 
     const editorClick = () => {
+        setvisibleCancel(true);
         setHiddenEditor(false);
         setHiddenText(true);
+    }
+
+    const hideCancel = () => {
+        setHiddenEditor(true);
+        setHiddenText(false);
+        setvisibleCancel(false);
     }
 
 
@@ -71,6 +82,10 @@ function TextEditor() {
 
                 <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check"
                         label="Save" loading={loading} onClick={handleSaveClick} size={"small"}/>
+
+                <Button className={isVisibleCancel ? "visible-element" : "invisible-element"}
+                        style={{marginTop: '10px', marginLeft: '10px'}} icon="pi pi-times"
+                        label="Cancel" loading={loading} onClick={hideCancel} size={"small"}/>
             </Panel>
         </div>
     );
