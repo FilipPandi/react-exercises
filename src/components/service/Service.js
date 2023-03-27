@@ -1,13 +1,14 @@
 import axios from "axios";
-import {TextModel} from "./TextModel";
-import {CalendarModel} from "./CalendarModel";
+import {TextModel} from "../model/TextModel";
+import {CalendarModel} from "../model/CalendarModel";
 
 const prefixText = "/text";
 const prefixCalendar = "/calendar";
+
 export function SaveTextModel(text, textType) {
     const textModel = new TextModel(null, text, textType)
     if (text) {
-       return axios.post(prefixText + "/save", textModel);
+        return axios.post(prefixText + "/save", textModel);
     }
 }
 

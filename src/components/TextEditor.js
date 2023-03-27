@@ -4,8 +4,8 @@ import 'primereact/resources/themes/arya-green/theme.css'
 
 import {Editor} from 'primereact/editor';
 import {Button} from "primereact/button";
-import {GetByTextType, SaveTextModel} from "./Service";
-import {TextType} from "./TextModel";
+import {GetByTextType, SaveTextModel} from "./service/Service";
+import {TextType} from "./model/TextModel";
 import {EditText} from "react-edit-text";
 import {Panel} from "primereact/panel";
 import './style/custompanel.css';

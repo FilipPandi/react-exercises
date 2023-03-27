@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {Panel} from "primereact/panel";
 import {Calendar} from "primereact/calendar";
 import {Button} from "primereact/button";
-import {GetByDate, SaveCalendarModel} from "./Service";
+import {GetByDate, SaveCalendarModel} from "./service/Service";
 import {Toast} from "primereact/toast";
 import {EditTextarea} from "react-edit-text";
 
