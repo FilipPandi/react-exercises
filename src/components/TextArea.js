@@ -48,17 +48,17 @@ function TextArea() {
         <div style={{padding: '2%'}}>
             <Toast ref={toastRef}/>
 
-            <Panel header="Option 2" className="custom-panel">
-            <div style={{margin: '20px'}}>
-                <EditTextarea
-                    name={textArea}
-                    placeholder={'Text goes here!'}
-                    id={'textArea'}
-                    rows={7}
-                    value={textArea}
-                    onChange={handleChange}
-                    style={{fontSize: '16px', width: '100%'}}
-                />
+            <Panel header="Text area edit" className="custom-panel">
+                <div style={{margin: '20px'}}>
+                    <EditTextarea
+                        name={textArea}
+                        placeholder={'Text goes here!'}
+                        id={'textArea'}
+                        rows={7}
+                        value={textArea}
+                        onChange={handleChange}
+                        style={{fontSize: '16px', width: '100%'}}
+                    />
             </div>
 
                 <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check" label="Save"

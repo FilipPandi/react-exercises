@@ -77,7 +77,7 @@ function TextEditor() {
         <div style={{padding: '2%'}}>
             <Toast ref={toastRef}/>
 
-            <Panel header="Option 1" className="custom-panel">
+            <Panel header="Editor" className="custom-panel">
                 <div style={{margin: '20px'}} onClick={editorClick}>
                     <EditText className={isVisibleEditText ? "visible-element" : "invisible-element"} id="textElement"
                               placeholder={placeholder} name={text}
