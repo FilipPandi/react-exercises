@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
-import { Toast } from 'primereact/toast';
-import { FileUpload } from 'primereact/fileupload';
-import { ProgressBar } from 'primereact/progressbar';
-import { Button } from 'primereact/button';
-import { Tooltip } from 'primereact/tooltip';
-import { Tag } from 'primereact/tag';
+import React, {useRef, useState} from 'react';
+import {Toast} from 'primereact/toast';
+import {FileUpload} from 'primereact/fileupload';
+import {ProgressBar} from 'primereact/progressbar';
+import {Button} from 'primereact/button';
+import {Tooltip} from 'primereact/tooltip';
+import {Tag} from 'primereact/tag';
 
 
 function FileUploadComponent() {
@@ -46,7 +46,7 @@ function FileUploadComponent() {
     const headerTemplate = (options) => {
         const { className, chooseButton, uploadButton, cancelButton } = options;
         const value = totalSize / 10000;
-        const formatedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
+        const formattedValue = fileUploadRef && fileUploadRef.current ? fileUploadRef.current.formatSize(totalSize) : '0 B';
 
         return (
             <div className={className} style={{ backgroundColor: 'transparent', display: 'flex', alignItems: 'center' }}>
@@ -54,8 +54,8 @@ function FileUploadComponent() {
                 {uploadButton}
                 {cancelButton}
                 <div className="flex align-items-center gap-3 ml-auto">
-                    <span>{formatedValue} / 1 MB</span>
-                    <ProgressBar value={value} showValue={false} style={{ width: '10rem', height: '12px' }}></ProgressBar>
+                    <span>{formattedValue} / 1 MB</span>
+                    <ProgressBar value={value} showValue={false} style={{width: '10rem', height: '12px'}}></ProgressBar>
                 </div>
             </div>
         );
@@ -93,17 +93,19 @@ function FileUploadComponent() {
     const cancelOptions = { icon: 'pi pi-fw pi-times', iconOnly: true, className: 'custom-cancel-btn p-button-danger p-button-rounded p-button-outlined' };
 
     return (
-        <div style={{marginTop: '10px', height: '1000px'}}>
+        <div style={{marginTop: '10px'}}>
             <Toast ref={toast}></Toast>
 
-            <Tooltip target=".custom-choose-btn" content="Choose" position="bottom" />
-            <Tooltip target=".custom-upload-btn" content="Upload" position="bottom" />
-            <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom" />
+            <Tooltip target=".custom-choose-btn" content="Choose" position="bottom"/>
+            <Tooltip target=".custom-upload-btn" content="Upload" position="bottom"/>
+            <Tooltip target=".custom-cancel-btn" content="Clear" position="bottom"/>
 
-            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*" maxFileSize={1000000}
-                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear} onClear={onTemplateClear}
+            <FileUpload ref={fileUploadRef} name="demo[]" url="/api/upload" multiple accept="image/*"
+                        maxFileSize={1000000}
+                        onUpload={onTemplateUpload} onSelect={onTemplateSelect} onError={onTemplateClear}
+                        onClear={onTemplateClear}
                         headerTemplate={headerTemplate} itemTemplate={itemTemplate} emptyTemplate={emptyTemplate}
-                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions} />
+                        chooseOptions={chooseOptions} uploadOptions={uploadOptions} cancelOptions={cancelOptions}/>
         </div>
     );
 }
