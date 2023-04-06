@@ -10,6 +10,7 @@ import {EditText} from "react-edit-text";
 import {Panel} from "primereact/panel";
 import './style/custompanel.css';
 import 'primeicons/primeicons.css';
+import FileUploadComponent from "./FileUploadComponent";
 
 function TextEditor() {
     const [text, setText] = useState('');
@@ -83,9 +84,14 @@ function TextEditor() {
                               placeholder={placeholder} name={text}
                               value={text} inline readonly/>
                 </div>
-                <Editor className={isVisibleEditor ? "visible-element" : "invisible-element"} id={'editorElement'}
-                        value={text} name={text} onTextChange={handleChange}
-                        style={{height: '320px'}}/>
+                <div className={isVisibleEditor ? "visible-element" : "invisible-element"}>
+                    <Editor id={'editorElement'}
+                            value={text} name={text} onTextChange={handleChange}
+                            style={{height: '320px'}}/>
+
+                    <FileUploadComponent/>
+                </div>
+
 
                 <Button type="submit" style={{marginTop: '10px', backgroundColor: '#54b5a6'}} icon="pi pi-check"
                         label="Save" loading={loading} onClick={handleSaveClick} size={"small"}/>
